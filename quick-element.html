@@ -1,0 +1,32 @@
+<link rel="import" href="../../polymer/polymer.html">
+<script>
+  (function() {
+    var QuickElementPrototype = Object.create(HTMLTemplateElement.prototype);
+    var QuickElementExtension = {
+      createdCallback: function() {
+        Polymer({
+          is: this.name,
+
+          _template: this
+        });
+      },
+
+      get name() {
+        return this.getAttribute('name');
+      }
+    };
+
+    Object.keys(QuickElementExtension).forEach(function(property) {
+      Object.defineProperty(
+        QuickElementPrototype,
+        property,
+        Object.getOwnPropertyDescriptor(QuickElementExtension, property)
+      );
+    });
+
+    document.registerElement('quick-element', {
+      prototype: QuickElementPrototype,
+      extends: 'template'
+    });
+  })();
+</script>

@@ -1,0 +1,13 @@
+{
+  "name": "quick-element",
+  "version": "0.0.1",
+  "authors": [
+    "Chris Joel <cdata@google.com>"
+  ],
+  "description": "Quickly build out custom elements with <template is=\"quick-element\">",
+  "main": "quick-element.html",
+  "license": "MIT",
+  "dependencies": {
+    "polymer": "polymer/polymer#0.8-preview"
+  }
+}
