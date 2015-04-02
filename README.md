@@ -15,5 +15,5 @@ without resorting to using an HTML Import.
 
 <!-- Use "x-greeter" elsewhere in the document -->
 <x-greeter greeting="Hello">World</x-greeter>
-<x-greeter greeting="Live long and prosper">Dumbledore</x-greeting>
+<x-greeter greeting="Live long and prosper">Dumbledore</x-greeter>
 ```
