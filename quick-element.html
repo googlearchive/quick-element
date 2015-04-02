@@ -3,9 +3,13 @@
   (function() {
     var QuickElementPrototype = Object.create(HTMLTemplateElement.prototype);
     var QuickElementExtension = {
+      KEY_COMPLEXITY_REGEXP: /[.]/,
+
       createdCallback: function() {
         Polymer({
           is: this.name,
+
+          properties: this.properties,
 
           _template: this
         });
@@ -13,6 +17,38 @@
 
       get name() {
         return this.getAttribute('name');
+      },
+
+      get properties() {
+        return this.simpleAnnotationPropertyKeys.reduce(function(properties, key) {
+          properties[key] = {
+            reflectToAttribute: true
+          };
+          return properties;
+        }, {});
+      },
+
+      get simpleAnnotationPropertyKeys() {
+        return this.annotationPropertyKeys.filter(function(key) {
+          return !this.KEY_COMPLEXITY_REGEXP.test(key);
+        }, this);
+      },
+
+      get annotationPropertyKeys() {
+        return this.archetype._annotes.map(function(annote) {
+          return annote.bindings[0].value;
+        });
+      },
+
+      get archetype() {
+        var archetype = Object.create(Polymer.Base);
+
+        archetype._template = document.createElement('template');
+        archetype._template.innerHTML = this.innerHTML;
+        archetype._prepAnnotations();
+        archetype._marshalAnnotationReferences();
+
+        return archetype;
       }
     };
 
