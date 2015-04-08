@@ -8,6 +8,6 @@
   "main": "quick-element.html",
   "license": "MIT",
   "dependencies": {
-    "polymer": "polymer/polymer#0.8-preview"
+    "polymer": "polymer/polymer#0.8-rc2"
   }
 }
